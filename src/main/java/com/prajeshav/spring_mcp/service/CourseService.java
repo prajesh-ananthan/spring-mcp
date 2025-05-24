@@ -29,17 +29,13 @@ public class CourseService {
     }
 
     @Tool(name = PAV_GET_COURSE, description = "Retrieves a single course by title")
-    public List<Course> getCourse(String title) {
-        return courses.stream().filter(course -> course.title().equals(title))
-                .findFirst().orElse(null);
+    public Course getCourse(String title) {
+        return courses.stream().filter(course -> course.title().equals(title)).findFirst().orElse(null);
     }
 
     @PostConstruct
     public void init() {
-        log.info("Initializing default courses");
-        courses.addAll(List.of(
-                new Course("Spring Boot Fundamentals", "https://example.com/spring-boot"),
-                new Course("Java Programming Masterclass", "https://example.com/java-master"))
-        );
+        log.info(">>> Loaded {} courses", 2);
+        courses.addAll(List.of(new Course("Spring Boot Fundamentals", "https://example.com/spring-boot"), new Course("Java Programming Masterclass", "https://example.com/java-master")));
     }
 }
